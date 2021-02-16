@@ -36,7 +36,7 @@ var sum = function(array) {
 // **3. Sum all numbers in an array containing nested arrays.
 // arraySum([1,[2,3],[[4]],5]); // 15
 var arraySum = function(array) {
-  var result = 0
+  var result = 0;
 
   // base case
   if (!Array.isArray(array)) {
@@ -79,6 +79,25 @@ var isEven = function(n) {
 // sumBelow(10); // 45
 // sumBelow(7); // 21
 var sumBelow = function(n) {
+  var result = 0;
+
+  // base case
+  if (n === 0) {
+    return result;
+  }
+// recursive case
+  if (n < 0) {
+    var isNegative = true;
+  }
+  n = Math.abs(n);
+  result = n-1;
+  result += sumBelow(n-1);
+
+  if (isNegative) {
+    return -result;
+  } else {
+  return result;
+  }
 };
 
 // **6. Get the integers within a range (x, y).
