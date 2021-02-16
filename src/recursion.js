@@ -2,39 +2,79 @@
 
 // Solve the following prompts using recursion.
 
-// 1. Calculate the factorial of a number. The factorial of a non-negative integer n,
+// **1. Calculate the factorial of a number. The factorial of a non-negative integer n,
 // denoted by n!, is the product of all positive integers less than or equal to n.
 // Example: 5! = 5 x 4 x 3 x 2 x 1 = 120
 // factorial(5); // 120
 var factorial = function(n) {
+  if (n < 0) {
+    return null;
+  }
+  if (n === 0) {
+    return 1;
+  }
+  return (n * factorial(n - 1));
 };
 
-// 2. Compute the sum of an array of integers.
+// **2. Compute the sum of an array of integers.
 // sum([1,2,3,4,5,6]); // 21
 var sum = function(array) {
+  var result = 0;
+
+  // base case
+  if (!Array.isArray(array)) {
+    return array;
+  }
+  // recursion case
+  array.forEach(function (item) {
+   result += sum(item);
+  });
+
+  return result;
 };
 
-// 3. Sum all numbers in an array containing nested arrays.
+// **3. Sum all numbers in an array containing nested arrays.
 // arraySum([1,[2,3],[[4]],5]); // 15
 var arraySum = function(array) {
+  var result = 0
+
+  // base case
+  if (!Array.isArray(array)) {
+    return array;
+  }
+
+  // recursion case
+    // iterate over the array
+    array.forEach(function (item) {
+      if (!Array.isArray(item)) {
+        result += item;
+      } else {
+        result += arraySum(item);
+      }
+    });
+      // if the current item is NOT an array
+          // add it to the result
+      // otherwise keep iterating
+  return result;
 };
 
-// 4. Check if a number is even.
+
+// **4. Check if a number is even.
 var isEven = function(n) {
 };
 
-// 5. Sum all integers below a given integer.
+// **5. Sum all integers below a given integer.
 // sumBelow(10); // 45
 // sumBelow(7); // 21
 var sumBelow = function(n) {
 };
 
-// 6. Get the integers within a range (x, y).
+// **6. Get the integers within a range (x, y).
 // range(2,9); // [3,4,5,6,7,8]
 var range = function(x, y) {
 };
 
-// 7. Compute the exponent of a number.
+// **7. Compute the exponent of a number.
 // The exponent of a number says how many times the base number is used as a factor.
 // 8^2 = 8 x 8 = 64. Here, 8 is the base and 2 is the exponent.
 // exponent(4,3); // 64
@@ -42,18 +82,18 @@ var range = function(x, y) {
 var exponent = function(base, exp) {
 };
 
-// 8. Determine if a number is a power of two.
+// **8. Determine if a number is a power of two.
 // powerOfTwo(1); // true
 // powerOfTwo(16); // true
 // powerOfTwo(10); // false
 var powerOfTwo = function(n) {
 };
 
-// 9. Write a function that reverses a string.
+// **9. Write a function that reverses a string.
 var reverse = function(string) {
 };
 
-// 10. Write a function that determines if a string is a palindrome.
+// **10. Write a function that determines if a string is a palindrome.
 var palindrome = function(string) {
 };
 
@@ -131,14 +171,14 @@ var rMap = function(array, callback) {
 var countKeysInObj = function(obj, key) {
 };
 
-// 23. Write a function that counts the number of times a value occurs in an object.
+// **23. Write a function that counts the number of times a value occurs in an object.
 // var obj = {'e':{'x':'y'},'t':{'r':{'e':'r'},'p':{'y':'r'}},'y':'e'};
 // countValuesInObj(obj, 'r') // 2
 // countValuesInObj(obj, 'e') // 1
 var countValuesInObj = function(obj, value) {
 };
 
-// 24. Find all keys in an object (and nested objects) by a provided name and rename
+// **24. Find all keys in an object (and nested objects) by a provided name and rename
 // them to a provided new name while preserving the value stored at that key.
 var replaceKeysInObj = function(obj, oldKey, newKey) {
 };
