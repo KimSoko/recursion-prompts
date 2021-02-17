@@ -185,9 +185,8 @@ var reverse = function(string) {
   //base case
   if (string.length === 1) {
     return string;
-  }
-  // recursive case
-  if (string.length > 1) {
+  } else {
+    // recursive case
     var savedChar = string.slice(0, 1);
     reversedStr = reversedStr.concat(reverse(string.slice(1)));
     reversedStr = reversedStr.concat(savedChar);
@@ -198,7 +197,30 @@ var reverse = function(string) {
 
 // **10. Write a function that determines if a string is a palindrome.
 var palindrome = function(string) {
+  var result = false;
+  var reversedStr = '';
+
+  //base case
+  if (string.length === 1) {
+    return string;
+    //recursive case
+  } else {
+    var savedChar = string.slice(0, 1);
+    var slicedStr = string.slice(1);
+    reversedStr = reversedStr.concat(palindrome(slicedStr));
+    reversedStr = reversedStr.concat(savedChar);
+  }
+  if (string !== slicedStr) {
+    return reversedStr;
+  }
+
+  if (string === reversedStr) {
+    result = true;
+  }
+
+  return result;
 };
+
 
 // 11. Write a function that returns the remainder of x divided by y without using the
 // modulo (%) operator.
@@ -268,7 +290,10 @@ var rMap = function(array, callback) {
 };
 
 // 22. Write a function that counts the number of times a key occurs in an object.
-// var obj = {'e':{'x':'y'},'t':{'r':{'e':'r'},'p':{'y':'r'}},'y':'e'};
+// var obj = {'e':{'x':'y'},
+//            't':{'r':{'e':'r'},
+//            'p':{'y':'r'}},
+//            'y':'e'};
 // countKeysInObj(obj, 'r') // 1
 // countKeysInObj(obj, 'e') // 2
 var countKeysInObj = function(obj, key) {
@@ -279,6 +304,22 @@ var countKeysInObj = function(obj, key) {
 // countValuesInObj(obj, 'r') // 2
 // countValuesInObj(obj, 'e') // 1
 var countValuesInObj = function(obj, value) {
+  var count = 0;
+  var arrOfValues = Object.values(obj);
+
+  // base case
+    if (typeof obj === 'string' && obj === value) {
+      return 1;
+    } else if (typeof obj === 'string' && obj !== value) {
+      return 0;
+    }
+
+  // recursive case
+  arrOfValues.forEach(function(item) {
+      count += countValuesInObj(item, value);
+  });
+
+  return count;
 };
 
 // **24. Find all keys in an object (and nested objects) by a provided name and rename
