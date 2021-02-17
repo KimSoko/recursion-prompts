@@ -332,7 +332,7 @@ var countKeysInObj = function(obj, key) {
   arrOfKeys.forEach(function(item) {
       count += countKeysInObj(item, key);
   });
-  console.log(arrOfKeys);
+
   return count;
 };
 
@@ -365,6 +365,20 @@ var countValuesInObj = function(obj, value) {
 // input = {e:{x:'y'},t:{r:{e:'r'},p:{y:'r'}},y:'e'};
 var replaceKeysInObj = function(obj, oldKey, newKey) {
 
+  // base case
+    if (obj.hasOwnProperty(oldKey)) {
+      obj[newKey] = obj[oldKey];
+      delete obj[oldKey];
+    }
+
+
+  // recursive case
+  for (var key in obj) {
+    if (typeof obj[key] === 'object') {
+      replaceKeysInObj(obj[key], oldKey, newKey);
+    }
+  }
+  return obj;
 };
 
 // 25. Get the first n Fibonacci numbers. In the Fibonacci sequence, each subsequent
