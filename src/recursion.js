@@ -139,6 +139,21 @@ var range = function(x, y) {
 // exponent(4,3); // 64
 // https://www.khanacademy.org/computing/computer-science/algorithms/recursive-algorithms/a/computing-powers-of-a-number
 var exponent = function(base, exp) {
+  // base case
+  if (exp === 0) {
+    return 1;
+  }
+  // recursive case
+  if (exp > 0 && exp % 2 === 0) {
+    var x = exponent(base, (exp/2));
+    return x * x;
+  } else if (exp > 0 && exp % 2 === 1) {
+    var y = exponent(base, (exp - 1));
+    return y * base;
+  } else if (exp < 0) {
+    var z = exponent(base, -exp);
+    return 1 / z;
+  }
 };
 
 // **8. Determine if a number is a power of two.
