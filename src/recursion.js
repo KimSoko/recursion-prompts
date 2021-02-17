@@ -292,12 +292,50 @@ var rMap = function(array, callback) {
 // 22. Write a function that counts the number of times a key occurs in an object.
 // var obj = {'e':{'x':'y'},
 //            't':{'r':{'e':'r'},
-//            'p':{'y':'r'}},
+//                 'p':{'y':'r'}
+//                },
 //            'y':'e'};
 // countKeysInObj(obj, 'r') // 1
 // countKeysInObj(obj, 'e') // 2
 var countKeysInObj = function(obj, key) {
+  var count = 0;
+
+  // base case
+    if (typeof obj === 'string' && obj === key) {
+      return 1;
+    } else if (typeof obj === 'string' && obj !== key) {
+      return 0;
+    }
+
+  var arrOfKeys = Object.keys(obj);
+  var arrOfValues = Object.values(obj);
+
+
+  // grabbing the keys in the nested values
+  arrOfValues.forEach(function(item){
+    if (typeof item === 'object') {
+      for (var key in item) {
+        arrOfKeys.push(key);
+      }
+    }
+    var moreValues = Object.values(item);
+    moreValues.forEach(function(innerItem) {
+      if (typeof innerItem === 'object') {
+        for (var innerKey in innerItem) {
+          arrOfKeys.push(innerKey);
+        }
+      }
+    });
+  });
+
+  // recursive case
+  arrOfKeys.forEach(function(item) {
+      count += countKeysInObj(item, key);
+  });
+  console.log(arrOfKeys);
+  return count;
 };
+
 
 // **23. Write a function that counts the number of times a value occurs in an object.
 // var obj = {'e':{'x':'y'},'t':{'r':{'e':'r'},'p':{'y':'r'}},'y':'e'};
@@ -324,7 +362,9 @@ var countValuesInObj = function(obj, value) {
 
 // **24. Find all keys in an object (and nested objects) by a provided name and rename
 // them to a provided new name while preserving the value stored at that key.
+// input = {e:{x:'y'},t:{r:{e:'r'},p:{y:'r'}},y:'e'};
 var replaceKeysInObj = function(obj, oldKey, newKey) {
+
 };
 
 // 25. Get the first n Fibonacci numbers. In the Fibonacci sequence, each subsequent
