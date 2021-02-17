@@ -7,12 +7,15 @@
 // Example: 5! = 5 x 4 x 3 x 2 x 1 = 120
 // factorial(5); // 120
 var factorial = function(n) {
+  // edge case
   if (n < 0) {
     return null;
   }
+  // base case
   if (n === 0) {
     return 1;
   }
+  // recursive case
   return (n * factorial(n - 1));
 };
 
@@ -70,6 +73,7 @@ var isEven = function(n) {
   } else if (n === 1) {
     return false;
   } else {
+    // recursive case
     return isEven(n-2);
   }
 
@@ -103,7 +107,31 @@ var sumBelow = function(n) {
 // **6. Get the integers within a range (x, y).
 // range(2,9); // [3,4,5,6,7,8]
 var range = function(x, y) {
-};
+  var result = [];
+
+  if (x < y) {
+    var valueAdd = x + 1;
+  } else {
+    valueAdd = x - 1;
+  }
+
+    // edge case
+    if ((y - x) === 0 || (x - y) === 0 || (y - x) === 1 || (x - y) === 1) {
+      return result;
+    }
+
+    // base case
+    if (((x < y) && (x + 2) === y) || ((y < x) && (x - 2) === y)) {
+      return valueAdd;
+    } else {
+       // recursive case;
+      result = result.concat(range(valueAdd, y));
+      result.unshift(valueAdd);
+    }
+
+    return result;
+  };
+
 
 // **7. Compute the exponent of a number.
 // The exponent of a number says how many times the base number is used as a factor.
